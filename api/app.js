@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 const testRouter = require('./routes/test');
 
 const allowedOrigins = ['http://localhost:3000'/**,
-                      'http://yourapp.com'**/];
+                      'http://yourapp.com'    **/];
 
 const app = express();
 
