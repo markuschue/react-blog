@@ -1,11 +1,9 @@
-import Data from './Data.jsx';
-import ResponsiveAppBar from './ResponsiveAppBar.jsx';
+import PrimarySearchAppBar from './Header.jsx';
 
 function App() {
   return (
     <div className="App">
-      <ResponsiveAppBar />
-      
+      <PrimarySearchAppBar />
     </div>
   );
 }
