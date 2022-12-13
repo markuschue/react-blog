@@ -17,7 +17,7 @@ function Header() {
             component='div'
             sx={{ ml: {xs: 0, sm: 15}, mr: 3}}
           >
-            <a href='/' style={{color: 'white', textDecoration: 'none'}}>
+            <a className="hvr-buzz-out" href='/' style={{color: 'white', textDecoration: 'none'}}>
               <img src='https://cdn-icons-png.flaticon.com/512/628/628283.png' alt='logo' style={{height: '51px', width: '51px'}} />
             </a>
           </Typography>

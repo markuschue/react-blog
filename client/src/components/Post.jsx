@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { IconButton, CardActionArea, CardActions, Chip, Divider, Tooltip } from '@mui/material';
 import DeleteIcon  from '@mui/icons-material/Delete';
 import ArchiveIcon  from '@mui/icons-material/Archive';
+import EditIcon  from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
 
 function Post({ post }) {
@@ -29,10 +30,15 @@ function Post({ post }) {
       <Divider variant='middle' light='true' />
       <CardActions>
         <Chip label={post.category} color='custom' variant='outlined' sx={{mx: 1}}/>
-        <Box sx={{ flexGrow: 1 }} />
         <Typography variant='caption' color='text.secondary' sx={{mx: 1}}>
           {post.author}, {post.date}
         </Typography>
+        <Box sx={{ flexGrow: 1 }} />
+        <Tooltip title="Edit" aria-label="delete">
+          <IconButton size="small" color="custom" alt = "Delete">
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title='Archive' aria-label='archive'>
           <IconButton size='large' color='custom'>
             <ArchiveIcon />
