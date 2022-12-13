@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import SearchBar from './SearchBar';
 import DrawerBar from './DrawerBar';
 
-export default function PrimarySearchAppBar() {
+function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" sx={{backgroundColor: "#222831"}}>
@@ -29,3 +29,5 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+export default Header;

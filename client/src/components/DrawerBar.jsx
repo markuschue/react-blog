@@ -12,8 +12,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CreateIcon from '@mui/icons-material/Create';
+import { Link } from 'react-router-dom';
 
-export default function DrawerBar() {
+function DrawerBar() {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);
 
   const toggleDrawer = open => (event) => {
@@ -30,13 +31,17 @@ export default function DrawerBar() {
 
   const composeButton = (
     <Button variant="contained" startIcon={<CreateIcon />} color="success" sx={{width: "20ch"}}>
-      Compose
+      <Link to="/compose" style={{color: "white", textDecoration: "none"}}>
+        Compose
+      </Link>
     </Button>
   );
 
   const draftsButton = (
     <Button variant="outlined" startIcon={<DraftsIcon />} color="success" sx={{width: "20ch"}}>
-      Drafts
+      <Link to="/drafts" style={{color: "success", textDecoration: "none"}}>
+        Drafts
+      </Link>
     </Button>
   );
 
@@ -94,3 +99,5 @@ export default function DrawerBar() {
     </IconButton>
   )
 }
+
+export default DrawerBar;
