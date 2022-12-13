@@ -14,8 +14,13 @@ router.route('/')
 
   .post(function(req, res, next) {
     const post = new Post({
-      name: req.body.name,
-      age: req.body.age
+      title: req.body.title,
+      description: req.body.description,
+      content: req.body.content,
+      author: req.body.author,
+      date: req.body.date,
+      imgURL: req.body.imgURL,
+      category: req.body.category
     });
     post.save().then(() => {
       res.status(200).send('Success uploading new post.');

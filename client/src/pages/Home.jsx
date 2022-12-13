@@ -1,25 +1,18 @@
 import Post from '../components/Post.jsx';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 
 function Home() {
-  let posts = [{
-    title: 'hello',
-    description: 'i like lizzards',
-    author: 'me',
-    date: '13/12/2022',
-    imgURL: 'https://static.inaturalist.org/photos/95742200/medium.jpeg',
-    category: 'lizzards',
-  },
-  {
-    title: 'ayo',
-    description: 'the pizza here',
-    author: 'yopopopo',
-    date: '13/12/2022',
-    imgURL: 'https://i.ytimg.com/vi/dRCy-jGKIJ4/maxresdefault.jpg',
-    category: 'pizza',
-  }];
+  const [posts, setPosts] = React.useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:9000/posts/').then(res => res.json()).then(fetched => {
+      setPosts(fetched);
+    });
+  }, []);
+
   return (
     <Container maxWidth='md'>
       <Grid container spacing={2} sx={{my: 2}} justifyContent='center' alignItems='stretch' direction='column'>

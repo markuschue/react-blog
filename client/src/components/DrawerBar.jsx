@@ -52,7 +52,7 @@ function DrawerBar() {
       onKeyDown={toggleDrawer(false)}
     >
       <List sx={{backgroundColor: '#181D25'}}>
-        <ListItem>
+        <ListItem key={0}>
           <ListItemButton onClick={toggleDrawer(false)} sx={{
             justifyContent: 'center',
             height: '7ch'
@@ -63,8 +63,8 @@ function DrawerBar() {
       </List>
       <Divider />
       <List>
-        {[composeButton, draftsButton].map((button) => (
-          <ListItem disablePadding>
+        {[composeButton, draftsButton].map((button, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton sx = {{justifyContent: 'center'}}>
               <ListItemIcon>
                 {button}
@@ -83,9 +83,9 @@ function DrawerBar() {
       color='custom'
       aria-label='open drawer'
     >
-      <Button onClick={toggleDrawer(true)}>
+      <IconButton onClick={toggleDrawer(true)}>
         <MenuIcon color='custom'/>
-      </Button>
+      </IconButton>
       <SwipeableDrawer
         open={isDrawerOpen}
         onClose={toggleDrawer(false)}
