@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /** Custom react component for fetching and rendering JSON data from the server */
 function Data(props) {
@@ -16,7 +16,7 @@ function Data(props) {
 
   return (
     <div>
-      <h1>{"{"}</h1>
+      <h1>{'{'}</h1>
       {keys.map((key, index) => {
         return (
           <div key={index}>
@@ -24,7 +24,7 @@ function Data(props) {
           </div>
         );
       })}
-      <h1>{"}"}</h1>
+      <h1>{'}'}</h1>
     </div>
   );
 }

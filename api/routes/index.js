@@ -4,8 +4,8 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.json({
-    testing: "Hello World!",
-    status: "OK"
+    testing: 'Hello World!',
+    status: 'OK'
   });
 });
 

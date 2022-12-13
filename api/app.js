@@ -7,16 +7,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const indexRouter = require('./routes/index');
-const testRouter = require('./routes/test');
+const postRouter = require('./routes/posts');
 
 const allowedOrigins = ['http://localhost:3000'/**,
                       'http://yourapp.com'    **/];
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -41,7 +37,7 @@ app.use(cors({
 }));
 
 app.use('/', indexRouter);
-app.use('/test', testRouter);
+app.use('/posts', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

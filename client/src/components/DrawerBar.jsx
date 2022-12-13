@@ -30,16 +30,16 @@ function DrawerBar() {
   };
 
   const composeButton = (
-    <Button variant="contained" startIcon={<CreateIcon />} color="success" sx={{width: "20ch"}}>
-      <Link to="/compose" style={{color: "white", textDecoration: "none"}}>
+    <Button variant='contained' startIcon={<CreateIcon />} color='success' sx={{width: '20ch'}}>
+      <Link to='/compose' style={{color: 'white', textDecoration: 'none'}}>
         Compose
       </Link>
     </Button>
   );
 
   const draftsButton = (
-    <Button variant="outlined" startIcon={<DraftsIcon />} color="success" sx={{width: "20ch"}}>
-      <Link to="/drafts" style={{color: "green", textDecoration: "none"}}>
+    <Button variant='outlined' startIcon={<DraftsIcon />} color='success' sx={{width: '20ch'}}>
+      <Link to='/drafts' style={{color: 'green', textDecoration: 'none'}}>
         Drafts
       </Link>
     </Button>
@@ -47,17 +47,17 @@ function DrawerBar() {
 
   const drawerList = (
     <Box
-      role="presentation"
+      role='presentation'
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List sx={{backgroundColor: "#181D25"}}>
+      <List sx={{backgroundColor: '#181D25'}}>
         <ListItem>
           <ListItemButton onClick={toggleDrawer(false)} sx={{
-            justifyContent: "center",
-            height: "7ch"
+            justifyContent: 'center',
+            height: '7ch'
           }} >
-            <CloseIcon color="warning" />
+            <CloseIcon color='warning' />
           </ListItemButton>
         </ListItem>
       </List>
@@ -65,7 +65,7 @@ function DrawerBar() {
       <List>
         {[composeButton, draftsButton].map((button) => (
           <ListItem disablePadding>
-            <ListItemButton sx = {{justifyContent: "center"}}>
+            <ListItemButton sx = {{justifyContent: 'center'}}>
               <ListItemIcon>
                 {button}
               </ListItemIcon>
@@ -78,10 +78,10 @@ function DrawerBar() {
 
   return (
     <IconButton
-      size="large"
-      edge="start"
-      color="custom"
-      aria-label="open drawer"
+      size='large'
+      edge='start'
+      color='custom'
+      aria-label='open drawer'
     >
       <Button onClick={toggleDrawer(true)}>
         <MenuIcon color='custom'/>
@@ -90,9 +90,9 @@ function DrawerBar() {
         open={isDrawerOpen}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
-        anchor="right"
+        anchor='right'
         variant='temporary'
-        PaperProps={{ sx: { width: 250, backgroundColor: "#222831", color: "#EEEEEE" } }}
+        PaperProps={{ sx: { width: 250, backgroundColor: '#222831', color: '#EEEEEE' } }}
       >
         {drawerList}
       </SwipeableDrawer>

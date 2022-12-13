@@ -1,21 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "../pages/Layout.jsx";
-import Home from "../pages/Home.jsx";
-import NoPage from "../pages/NoPage.jsx";
-import Compose from "../pages/Compose.jsx";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from '../pages/Layout.jsx';
+import Home from '../pages/Home.jsx';
+import NoPage from '../pages/NoPage.jsx';
+import Compose from '../pages/Compose.jsx';
 import Drafts from '../pages/Drafts.jsx';
-import Theme from "./Theme.jsx";
+import Theme from './Theme.jsx';
 
 function App() {
   return (
     <Theme>
-      <BrowserRouter className = "App">
+      <BrowserRouter className = 'App'>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="compose" element={<Compose />} />
-            <Route path="drafts" element={<Drafts />} />
-            <Route path="*" element={<NoPage />} />
+            <Route path='compose' element={<Compose />} />
+            <Route path='drafts' element={<Drafts />} />
+            <Route path='*' element={<NoPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
