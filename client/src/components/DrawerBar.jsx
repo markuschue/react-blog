@@ -39,7 +39,7 @@ function DrawerBar() {
 
   const draftsButton = (
     <Button variant="outlined" startIcon={<DraftsIcon />} color="success" sx={{width: "20ch"}}>
-      <Link to="/drafts" style={{color: "success", textDecoration: "none"}}>
+      <Link to="/drafts" style={{color: "green", textDecoration: "none"}}>
         Drafts
       </Link>
     </Button>
@@ -51,13 +51,13 @@ function DrawerBar() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List sx={{ backgroundColor: "#10151C" }}>
+      <List sx={{backgroundColor: "#181D25"}}>
         <ListItem>
           <ListItemButton onClick={toggleDrawer(false)} sx={{
             justifyContent: "center",
             height: "7ch"
           }} >
-            <CloseIcon />
+            <CloseIcon color="warning" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -65,7 +65,7 @@ function DrawerBar() {
       <List>
         {[composeButton, draftsButton].map((button) => (
           <ListItem disablePadding>
-            <ListItemButton sx = {{justifyContent: "center", color: "#EEEEEE"}}>
+            <ListItemButton sx = {{justifyContent: "center"}}>
               <ListItemIcon>
                 {button}
               </ListItemIcon>
@@ -80,11 +80,11 @@ function DrawerBar() {
     <IconButton
       size="large"
       edge="start"
-      color="inherit"
+      color="custom"
       aria-label="open drawer"
     >
       <Button onClick={toggleDrawer(true)}>
-        <MenuIcon sx={{ color: "#EEEEEE" }} />
+        <MenuIcon color='custom'/>
       </Button>
       <SwipeableDrawer
         open={isDrawerOpen}

@@ -9,7 +9,7 @@ import DrawerBar from './DrawerBar';
 function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static" sx={{backgroundColor: "#222831"}}>
+      <AppBar position="static" color='primary'>
         <Toolbar sx={{height: "10ch"}}>
           <Typography
             variant="h6"
