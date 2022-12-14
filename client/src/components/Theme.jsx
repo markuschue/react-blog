@@ -37,7 +37,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& label.Mui-focused': {
-            color: 'white',
+            color: '#bdbdbd',
+          },
+          '& label.Mui-error': {
+            color: '#990000',
           },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
@@ -45,7 +48,10 @@ const theme = createTheme({
             },
             '&.Mui-focused fieldset': {
               borderColor: '#bdbdbd',
-              color: 'white',
+            },
+            '&.Mui-error fieldset': {
+              borderColor: '#990000',
+              textColor: '#990000',
             },
           }
         }
