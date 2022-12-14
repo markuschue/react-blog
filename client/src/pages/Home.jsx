@@ -15,7 +15,14 @@ function Home() {
 
   return (
     <Container maxWidth='md'>
-      <Grid container spacing={2} sx={{my: 2}} justifyContent='center' alignItems='stretch' direction='column'>
+      <Grid 
+        container 
+        spacing={2} 
+        sx={{my: 2}} 
+        justifyContent='center' 
+        alignItems='stretch' 
+        direction='column'
+      >
         {posts.map((post) => (
           <Grid item>
             <Post post={post} />

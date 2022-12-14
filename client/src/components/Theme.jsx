@@ -32,6 +32,24 @@ const theme = createTheme({
           backgroundColor: '#bdbdbd',
         }
       }
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& label.Mui-focused': {
+            color: 'white',
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#bdbdbd',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#bdbdbd',
+              color: 'white',
+            },
+          }
+        }
+      }
     }
   }
 });
