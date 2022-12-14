@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBar() {
   return (
-    <Search sx = {{flexGrow: {xs: 1, sm: 0}}}>
+    <Search sx = {{flexGrow: {xs: 1, md: 0}}}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>

@@ -45,8 +45,8 @@ function Compose() {
             <Grid item xs={0} md={2} />
             <Grid item xs={1}>
               <Tooltip title="Upload image">
-                <IconButton color="custom" aria-label="upload picture" component="label" sx={{mt: {xs: 2, md: 0}}}>
-                  <input hidden accept="image/*" type="file"  
+                <IconButton color="custom" aria-label="upload picture" component="label" sx={{ mt: { xs: 2, md: 0 } }}>
+                  <input hidden accept="image/*" type="file"
                     onChange={(e) => handleInputChange(e, setHeaderImage)}
                   />
                   <PhotoCamera />
@@ -59,7 +59,7 @@ function Compose() {
                 placeholder="Upload or paste URL"
                 variant="outlined"
                 fullWidth
-                sx={{ mt: {xs: 2, md: 0} }}
+                sx={{ mt: { xs: 2, md: 0 } }}
                 onChange={(e) => handleInputChange(e, setHeaderImage)}
                 value={headerImage}
                 focused
@@ -74,7 +74,7 @@ function Compose() {
                 multiline
                 rows={8}
                 fullWidth
-                sx={{ my: 2}}
+                sx={{ my: 2 }}
                 variant="outlined"
                 onChange={(e) => handleInputChange(e, setContent)}
                 value={content}
@@ -103,11 +103,11 @@ function Compose() {
                     <SaveAltIcon />
                   </Button>
                 </Tooltip>
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   startIcon={<PublishIcon />}
                 >
-                  <Typography sx={{display: {xs: 'none', md: 'block'}}}>
+                  <Typography sx={{ display: { xs: 'none', md: 'block' } }}>
                     Publish
                   </Typography>
                 </Button>

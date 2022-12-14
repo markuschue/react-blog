@@ -82,6 +82,7 @@ function DrawerBar() {
       edge='start'
       color='custom'
       aria-label='open drawer'
+      sx={{ ml: 2 }}
     >
       <IconButton onClick={toggleDrawer(true)}>
         <MenuIcon color='custom'/>

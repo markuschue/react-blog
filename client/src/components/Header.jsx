@@ -15,14 +15,14 @@ function Header() {
             variant='h6'
             noWrap
             component='div'
-            sx={{ ml: {xs: 0, sm: 15}, mr: 3}}
+            sx={{ ml: {xs: 0, md: 15}, mr: 3}}
           >
             <a className="hvr-buzz-out" href='/' style={{color: 'white', textDecoration: 'none'}}>
               <img src='https://cdn-icons-png.flaticon.com/512/628/628283.png' alt='logo' style={{height: '51px', width: '51px'}} />
             </a>
           </Typography>
           <SearchBar />
-          <Box sx={{ flexGrow: 1, display: {xs: 'none', sm: 'block' }}} />
+          <Box sx={{ flexGrow: 1, display: {xs: 'none', md: 'block' }}} />
           <DrawerBar />
         </Toolbar>
       </AppBar>
