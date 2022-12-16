@@ -8,15 +8,26 @@ import DeleteIcon  from '@mui/icons-material/Delete';
 import ArchiveIcon  from '@mui/icons-material/Archive';
 import EditIcon  from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 function Post({ post }) {
+  const navigate = useNavigate();
+
+  function handleDelete() {
+    fetch(`http://localhost:9000/posts/${post._id}`, {
+      method: 'DELETE',
+    }).then(res => res.json()).then(() => {
+      navigate('/');
+    });
+  }
+
   return (
     <Card>
       <CardActionArea>
         <CardMedia
           component='img'
           height='248'
-          image={post.imgURL}
+          image={'http://localhost:9000/' + post.headerImage}
         />
         <CardContent sx={{minHeight: '100px'}}>
           <Typography gutterBottom variant='h5' component='div'>
@@ -45,7 +56,7 @@ function Post({ post }) {
           </IconButton>
         </Tooltip>
         <Tooltip title='Delete' aria-label='delete'>
-          <IconButton size='small' color='custom' alt = 'Delete'>
+          <IconButton size='small' color='custom' alt = 'Delete' onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

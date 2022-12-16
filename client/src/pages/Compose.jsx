@@ -11,6 +11,8 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useNavigate } from 'react-router-dom';
+import InputAdornment from '@mui/material/InputAdornment';
+import axios from 'axios';
 
 function Compose() {
   let [title, setTitle] = React.useState('');
@@ -31,6 +33,10 @@ function Compose() {
   function handleInputChange(e, inputSet) {
     inputSet(e.target.value);
     setAlerts({ ...alerts, [e.target.id]: false });
+  }
+
+  function handleFileChange(e) {
+    setHeaderImage(e.target.files[0]);
   }
 
   function checkIsPublishable() {
@@ -56,21 +62,22 @@ function Compose() {
   async function handlePublish() {
     if (checkIsPublishable()) {
       try {
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: title,
-            description: description,
-            author: 'Anonymous',
-            date: new Date().toLocaleDateString(),
-            headerImage: headerImage,
-            content: content,
-            category: category,
-          }),
-        };
-        const response = fetch('http://localhost:9000/posts/', requestOptions);
-        console.log(response);
+        const formData = new FormData();
+
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('author', 'Anonymous');
+        formData.append('date', new Date().toLocaleDateString());
+        formData.append('headerImage', headerImage);
+        formData.append('content', content);
+        formData.append('category', category);
+
+        await axios.post('http://localhost:9000/posts/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        
         navigate('/');
       } catch (error) {
         console.log(error);
@@ -97,42 +104,43 @@ function Compose() {
                 fullWidth
                 onChange={(e) => handleInputChange(e, setTitle)}
                 value={title}
-                focused
                 error={alerts.title}
                 helperText={alerts.title ? 'Title cannot be empty' : ''}
+                FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
               />
             </Grid>
             <Grid item xs={0} md={2} />
-            <Grid item xs={1}>
-              <Tooltip title="Upload image">
-                <IconButton 
-                  color="custom" 
-                  aria-label="upload picture" 
-                  component="label" 
-                  sx={{ mt: { xs: 2, md: 0 } }}
-                >
-                  <input 
-                    hidden accept="image/*" 
-                    type="file"
-                    onChange={(e) => handleInputChange(e, setHeaderImage)}
-                  />
-                  <PhotoCamera />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={10} sm={11} md={3}>
+            <Grid item xs={12} md={4}>
               <TextField
                 id="headerImage"
-                label="Header Image"
-                placeholder="Upload or paste URL"
+                placeholder={headerImage === '' ? 'Upload image' : headerImage}
                 variant="outlined"
                 fullWidth
                 sx={{ mt: { xs: 2, md: 0 } }}
-                onChange={(e) => handleInputChange(e, setHeaderImage)}
                 value={headerImage}
-                focused
                 error={alerts.headerImage}
-                helperText={alerts.headerImage ? 'Header image cannot be empty' : ''}
+                helperText={alerts.headerImage ? 'Must select image' : ''}
+                FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
+                disabled
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton
+                        color="custom"
+                        aria-label="upload picture"
+                        component="label"
+                      >
+                        <input
+                          hidden 
+                          accept="image/*"
+                          type="file"
+                          onChange={handleFileChange}
+                        />
+                        <PhotoCamera />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
             </Grid>
           </Grid>
@@ -149,9 +157,9 @@ function Compose() {
                 variant="outlined"
                 onChange={(e) => handleInputChange(e, setDescription)}
                 value={description}
-                focused
                 error={alerts.description}
                 helperText={alerts.description ? 'Description cannot be empty' : ''}
+                FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
               />
             </Grid>
           </Grid>
@@ -168,9 +176,9 @@ function Compose() {
                 variant="outlined"
                 onChange={(e) => handleInputChange(e, setContent)}
                 value={content}
-                focused
                 error={alerts.content}
                 helperText={alerts.content ? 'Content cannot be empty' : ''}
+                FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
               />
             </Grid>
           </Grid>
@@ -185,9 +193,9 @@ function Compose() {
                 fullWidth
                 onChange={(e) => handleInputChange(e, setCategory)}
                 value={category}
-                focused
                 error={alerts.category}
                 helperText={alerts.category ? 'Category cannot be empty' : ''}
+                FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
               />
             </Grid>
             <Grid item xs={1} md={4} />

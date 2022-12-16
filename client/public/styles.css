@@ -54,6 +54,14 @@ code {
   }
 }
 
+:disabled {
+  -webkit-text-fill-color: #bdbdbd !important;
+}
+
+.Mui-error :disabled {
+  -webkit-text-fill-color: #990000 !important;
+}
+
 /** hover.css effects **/
 /** Buzz out **/
 

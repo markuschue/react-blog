@@ -1,7 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/post.js');
+const multer = require('multer');
 
+// Handling file uploads with Multer
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().getTime() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10
+  },
+  fileFilter: fileFilter
+});
+
+// RESTful Routes for /api/posts
 router.route('/')
   .get(function(req, res, next) {
     Post.find(function(err, posts) {
@@ -12,14 +40,16 @@ router.route('/')
     });
   })
 
-  .post(function(req, res, next) {
+  .post(upload.single('headerImage') ,function(req, res, next) {
+    console.log('Your file is:');
+    console.log(req.file);
     const post = new Post({
       title: req.body.title,
       description: req.body.description,
       content: req.body.content,
       author: req.body.author,
       date: req.body.date,
-      imgURL: req.body.imgURL,
+      headerImage: req.file.path,
       category: req.body.category
     });
     post.save().then(() => {

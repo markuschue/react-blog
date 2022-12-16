@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors({
@@ -37,7 +38,7 @@ app.use(cors({
 }));
 
 app.use('/', indexRouter);
-app.use('/posts', postRouter);
+app.use('/posts/', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err);
 });
 
 module.exports = app;

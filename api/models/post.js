@@ -8,7 +8,7 @@ const PostSchema = new mongoose.Schema({
   content: String,
   author: String,
   date: String,
-  imgURL: String,
+  headerImage: String,
   category: String
 });
 
