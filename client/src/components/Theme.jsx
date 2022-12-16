@@ -50,17 +50,8 @@ const theme = createTheme({
               borderColor: '#bdbdbd',
             },
             '&.Mui-error fieldset': {
-              '&.Mui-disabled': {
-                borderColor: '#990000',
-              },
               borderColor: '#990000',
-            },
-            '&.Mui-disabled': {
-              '&.Mui-error': {
-                borderColor: '#990000',
-              },
-              borderColor: '#bdbdbd',
-            },
+            }
           }
         }
       }

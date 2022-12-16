@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/post.js');
 const multer = require('multer');
+const unlink = require('fs').unlink;
 
 // Handling file uploads with Multer
 const storage = multer.diskStorage({
@@ -80,7 +81,7 @@ router.route('/:id')
 
   .put(function(req, res) {
     Post.replaceOne(
-      {_id: req.params.postID},
+      {_id: req.params.id},
       {$set: req.body},
       function (err) {
         if (err)
@@ -94,7 +95,7 @@ router.route('/:id')
 
   .patch(function(req, res) {
     Post.updateOne(
-      {_id: req.params.postID},
+      {_id: req.params.id},
       req.body.patch,
       function (err) {
         if (err)
@@ -107,12 +108,23 @@ router.route('/:id')
   })
 
   .delete(function(req, res) {
-    Post.deleteOne({_id: req.params.postID}, function (err) {
+    // Delete the header image from the uploads folder and then delete the post from DB.
+    Post.findById(req.params.id, function(err, post) {
+      if (err)
+        next(err);
+      else if (post)
+        unlink(post.headerImage, (err) => {
+          if (err)
+            next(err);
+        });
+      else
+        res.status(404).send('Post not found');
+    });
+    Post.deleteOne({_id: req.params.id}, function (err) {
       if (err)
         next(err);
       else
         res.status(200).send('Post deleted successfully.');
-      res.status(404).send('No post found');
     });
   });
 

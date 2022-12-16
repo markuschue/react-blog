@@ -3,14 +3,19 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
+import axios from 'axios';
 
 function Home() {
   const [posts, setPosts] = React.useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:9000/posts/').then(res => res.json()).then(fetched => {
-      setPosts(fetched);
-    });
+    axios.get('http://localhost:3000/posts')
+      .then((res) => {
+        setPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (

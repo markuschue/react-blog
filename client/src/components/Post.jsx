@@ -8,16 +8,23 @@ import DeleteIcon  from '@mui/icons-material/Delete';
 import ArchiveIcon  from '@mui/icons-material/Archive';
 import EditIcon  from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import AlertDialog from './AlertDialog';
 
 function Post({ post }) {
-  const navigate = useNavigate();
+  const [openDialog, setOpenDialog] = React.useState(false);
+
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   function handleDelete() {
-    fetch(`http://localhost:9000/posts/${post._id}`, {
-      method: 'DELETE',
-    }).then(res => res.json()).then(() => {
-      navigate('/');
+    axios.delete('http://localhost:9000/posts/' + post._id).then(() => {
+      window.location.reload(false);
     });
   }
 
@@ -56,11 +63,21 @@ function Post({ post }) {
           </IconButton>
         </Tooltip>
         <Tooltip title='Delete' aria-label='delete'>
-          <IconButton size='small' color='custom' alt = 'Delete' onClick={handleDelete}>
+          <IconButton size='small' color='custom' alt = 'Delete' onClick={handleClickOpenDialog}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
       </CardActions>
+      <AlertDialog 
+        open={openDialog}
+        onClose={handleCloseDialog}
+        title={"Are you sure you want to delete the post?"}
+        content={"This action cannot be undone."}
+        closeButton={"Cancel"}
+        okayButton={"Delete"}
+        handleOkay={handleDelete}
+        handleCancel={handleCloseDialog}
+      />
     </Card>
   );
 }

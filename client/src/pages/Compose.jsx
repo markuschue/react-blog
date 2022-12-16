@@ -36,6 +36,7 @@ function Compose() {
   }
 
   function handleFileChange(e) {
+    console.log(e.target.files[0].name);
     setHeaderImage(e.target.files[0]);
   }
 
@@ -77,7 +78,6 @@ function Compose() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        
         navigate('/');
       } catch (error) {
         console.log(error);
@@ -113,15 +113,14 @@ function Compose() {
             <Grid item xs={12} md={4}>
               <TextField
                 id="headerImage"
-                placeholder={headerImage === '' ? 'Upload image' : headerImage}
+                placeholder='Select image'
                 variant="outlined"
                 fullWidth
                 sx={{ mt: { xs: 2, md: 0 } }}
-                value={headerImage}
+                value={headerImage.name}
                 error={alerts.headerImage}
                 helperText={alerts.headerImage ? 'Must select image' : ''}
                 FormHelperTextProps={{ sx: { position: 'fixed', alignSelf: 'flex-end' } }}
-                disabled
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -139,7 +138,8 @@ function Compose() {
                         <PhotoCamera />
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
+                  readOnly: true
                 }}
               />
             </Grid>
