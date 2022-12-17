@@ -33,7 +33,7 @@ const upload = multer({
 // RESTful Routes for /api/posts
 router.route('/')
   .get(function(req, res, next) {
-    Post.find(function(err, posts) {
+    Post.find({}).sort('-date').exec(function(err, posts) {
       if (err)
         return next(err);
       else
@@ -42,8 +42,6 @@ router.route('/')
   })
 
   .post(upload.single('headerImage') ,function(req, res, next) {
-    console.log('Your file is:');
-    console.log(req.file);
     const post = new Post({
       title: req.body.title,
       description: req.body.description,

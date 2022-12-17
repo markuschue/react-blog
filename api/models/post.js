@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/blogDB', {useNewUrlParser: true});
-mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', false);
 
 const PostSchema = new mongoose.Schema({
   title: String,

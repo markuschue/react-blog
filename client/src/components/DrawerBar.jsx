@@ -77,14 +77,15 @@ function DrawerBar() {
   );
 
   return (
-    <IconButton
-      size='large'
-      edge='start'
-      color='custom'
-      aria-label='open drawer'
-      sx={{ ml: 2 }}
-    >
-      <IconButton onClick={toggleDrawer(true)}>
+    <div>
+      <IconButton 
+        onClick={toggleDrawer(true)}
+        size='large'
+        edge='start'
+        color='custom'
+        aria-label='open drawer'
+        sx={{ ml: 2 }}
+      >
         <MenuIcon color='custom'/>
       </IconButton>
       <SwipeableDrawer
@@ -97,7 +98,7 @@ function DrawerBar() {
       >
         {drawerList}
       </SwipeableDrawer>
-    </IconButton>
+    </div>
   )
 }
 

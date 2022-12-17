@@ -33,23 +33,19 @@ function Post() {
         <Paper sx={{ my: 4, p: 5 }} elevation={3}>
           <Grid container justifyContent="space-between" alignItems={'center'} mb={2}>
               <Avatar alt="Remy Sharp" />
-              <Typography variant="h6" ml={2}>
-                {post.author}
-              </Typography>
+              <Grid item ml={2}>
+                <Typography variant="subtitle2" ml={1}>
+                  {post.author}
+                </Typography>
+                <Chip label={post.category} color='custom' variant='outlined' size='small' />
+                <Typography variant="overline" sx={{ ml: 1 }}>
+                  {post.date}
+                </Typography>
+              </Grid>
             <Box sx={{ flexGrow: 1 }} />
             <PostActions id={post._id} />
           </Grid>
-          <Grid container spacing={2} alignItems={'center'} sx={{mb: 2}}>
-            <Grid item>
-              <Chip label={post.category} color='custom' variant='outlined'/>
-            </Grid>
-            <Grid item>
-              <Typography variant="overline" sx={{ mb: 4 }}>
-                {post.date}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Divider variant='middle' light='true' />
+          <Divider light='true' />
           <Typography variant="h4" sx={{ my: 4 }}>
             <b>{post.title}</b>
           </Typography>

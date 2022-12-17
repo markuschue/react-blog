@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import PostActions from './PostActions';
 import { useNavigate } from 'react-router-dom';
 
-function Post({ post }) {
+function PostCard({ post }) {
   const navigate = useNavigate();
 
   return (
@@ -28,11 +28,11 @@ function Post({ post }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <Divider variant='middle' light='true' />
+      <Divider variant='middle' light={true} />
       <CardActions>
         <Chip label={post.category} color='custom' variant='outlined' sx={{mx: 1}}/>
         <Typography variant='caption' color='text.secondary' sx={{mx: 1}}>
-          {post.author}, {post.date}
+          {post.author} · {post.date}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <PostActions id={post._id} />
@@ -41,4 +41,4 @@ function Post({ post }) {
   );
 }
 
-export default Post;
+export default PostCard;

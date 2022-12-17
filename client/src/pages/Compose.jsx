@@ -68,7 +68,7 @@ function Compose() {
         formData.append('title', title);
         formData.append('description', description);
         formData.append('author', 'Anonymous');
-        formData.append('date', new Date().toLocaleDateString());
+        formData.append('date', new Date().toLocaleString());
         formData.append('headerImage', headerImage);
         formData.append('content', content);
         formData.append('category', category);

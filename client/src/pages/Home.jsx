@@ -1,4 +1,4 @@
-import Post from '../components/Post.jsx';
+import PostCard from '../components/PostCard.jsx';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { Grid } from '@mui/material';
@@ -28,9 +28,9 @@ function Home() {
         alignItems='stretch' 
         direction='column'
       >
-        {posts.map((post) => (
-          <Grid item>
-            <Post post={post} />
+        {posts.map((post, index) => (
+          <Grid item key={index}>
+            <PostCard post={post} />
           </Grid>
         ))}
       </Grid>
