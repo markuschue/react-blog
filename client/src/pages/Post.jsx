@@ -45,7 +45,7 @@ function Post() {
             <Box sx={{ flexGrow: 1 }} />
             <PostActions id={post._id} />
           </Grid>
-          <Divider light='true' />
+          <Divider light = {true} />
           <Typography variant="h4" sx={{ my: 4 }}>
             <b>{post.title}</b>
           </Typography>

@@ -33,7 +33,7 @@ function PostActions({id}) {
   return(
     <div>
       <Tooltip title="Edit" aria-label="delete">
-          <IconButton size="small" color="custom" alt = "Delete">
+          <IconButton size="small" color="custom" alt = "Delete" onClick={() => navigate('/compose/' + id)}>
             <EditIcon />
           </IconButton>
         </Tooltip>

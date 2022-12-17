@@ -14,20 +14,11 @@ const storage = multer.diskStorage({
   }
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 const upload = multer({
   storage: storage,
   limits: {
     fileSize: 1024 * 1024 * 10
-  },
-  fileFilter: fileFilter
+  }
 });
 
 // RESTful Routes for /api/posts
@@ -41,7 +32,7 @@ router.route('/')
     });
   })
 
-  .post(upload.single('headerImage') ,function(req, res, next) {
+  .post(upload.single('headerImage'), function(req, res, next) {
     const post = new Post({
       title: req.body.title,
       description: req.body.description,
@@ -77,21 +68,35 @@ router.route('/:id')
     });
   })
 
-  .put(function(req, res) {
+  .put(upload.single('headerImage'), function(req, res, next) {
+    let oldImage = '';
+    Post.findById(req.params.id, function(err, post) {
+      if (err)
+        next(err);
+      else if (post)
+        oldImage = post.headerImage;
+    });
+    console.log(req.file);
+    req.body = {...req.body, headerImage: req.file.path};
     Post.replaceOne(
       {_id: req.params.id},
-      {$set: req.body},
+      req.body,
       function (err) {
-        if (err)
+        if (err) {
           next(err);
-        else
+        } else {
+          console.log('oldimage: ' + oldImage);
+          if (oldImage !== '')
+            unlink(oldImage, err => {
+              if (err) next(err);
+            });
           res.status(200).send('Post replaced successfully.');
-        res.status(404).send('No post found');
+        }
       }
     );
   })
 
-  .patch(function(req, res) {
+  .patch(function(req, res, next) {
     Post.updateOne(
       {_id: req.params.id},
       req.body.patch,
@@ -100,29 +105,30 @@ router.route('/:id')
           next(err);
         else
           res.status(200).send('Post patched successfully.');
-        res.status(404).send('No post found');
       }
     );
   })
 
-  .delete(function(req, res) {
-    // Delete the header image from the uploads folder and then delete the post from DB.
+  .delete(function(req, res, next) {
+    let oldImage = '';
     Post.findById(req.params.id, function(err, post) {
       if (err)
         next(err);
       else if (post)
-        unlink(post.headerImage, (err) => {
-          if (err)
-            next(err);
-        });
+        oldImage = post.headerImage;
       else
         res.status(404).send('Post not found');
     });
     Post.deleteOne({_id: req.params.id}, function (err) {
-      if (err)
+      if (err) {
         next(err);
-      else
+      } else {
+        if (oldImage !== '')
+          unlink(oldImage, err => {
+            if (err) next(err);
+          });
         res.status(200).send('Post deleted successfully.');
+      }
     });
   });
 

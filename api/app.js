@@ -14,14 +14,6 @@ const allowedOrigins = ['http://localhost:3000'/**,
 
 const app = express();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests with no origin 
@@ -36,6 +28,14 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/posts/', postRouter);
@@ -50,10 +50,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send(err);
+  console.log(err);
 });
 
 module.exports = app;

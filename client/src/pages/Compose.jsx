@@ -10,16 +10,16 @@ import PublishIcon from '@mui/icons-material/Publish';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InputAdornment from '@mui/material/InputAdornment';
 import axios from 'axios';
 
 function Compose() {
   let [title, setTitle] = React.useState('');
+  let [description, setDescription] = React.useState('');
   let [headerImage, setHeaderImage] = React.useState('');
   let [content, setContent] = React.useState('');
   let [category, setCategory] = React.useState('');
-  let [description, setDescription] = React.useState('');
   let [alerts, setAlerts] = React.useState({
     title: false,
     description: false,
@@ -29,6 +29,32 @@ function Compose() {
   });
 
   const navigate = useNavigate();
+  const id = useParams().id;
+
+  const setHeaderFromURL = async(fileName) => {
+    const response = await axios.get(`http://localhost:9000/${fileName}`, {
+      responseType: 'blob',
+    });
+    setHeaderImage(new File([response.data], fileName));
+  }
+
+  React.useEffect(() => {
+    if (id !== undefined) {
+      axios
+        .get(`http://localhost:9000/posts/${id}`)
+        .then((res) => {
+            setTitle(res.data.title);
+            setDescription(res.data.description);
+            setHeaderFromURL(res.data.headerImage);
+            setContent(res.data.content);
+            setCategory(res.data.category);
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate('/404');
+        });
+    }
+  }, [id]);
 
   function handleInputChange(e, inputSet) {
     inputSet(e.target.value);
@@ -36,7 +62,6 @@ function Compose() {
   }
 
   function handleFileChange(e) {
-    console.log(e.target.files[0].name);
     setHeaderImage(e.target.files[0]);
   }
 
@@ -64,20 +89,27 @@ function Compose() {
     if (checkIsPublishable()) {
       try {
         const formData = new FormData();
-
         formData.append('title', title);
         formData.append('description', description);
+        formData.append('headerImage', headerImage);
         formData.append('author', 'Anonymous');
         formData.append('date', new Date().toLocaleString());
-        formData.append('headerImage', headerImage);
         formData.append('content', content);
         formData.append('category', category);
-
-        await axios.post('http://localhost:9000/posts/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        if (id !== undefined) {
+          // If the id is defined, then we are editing a post, so we use the PUT method
+          await axios.put(`http://localhost:9000/posts/${id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            }
+          });
+        } else {
+          await axios.post('http://localhost:9000/posts', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            }
+          });
+        }
         navigate('/');
       } catch (error) {
         console.log(error);
