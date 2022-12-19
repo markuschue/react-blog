@@ -16,6 +16,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='compose' element={<Compose />} />
             <Route path='compose/:id' element={<Compose />} />
+            <Route path='search' element={<Home />} />
             <Route path='drafts' element={<Drafts />} />
             <Route path='posts/:id' element={<Post />} />
             <Route path='*' element={<NoPage />} />

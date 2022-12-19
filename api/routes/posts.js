@@ -76,7 +76,6 @@ router.route('/:id')
       else if (post)
         oldImage = post.headerImage;
     });
-    console.log(req.file);
     req.body = {...req.body, headerImage: req.file.path};
     Post.replaceOne(
       {_id: req.params.id},
