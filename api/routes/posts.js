@@ -40,7 +40,8 @@ router.route('/')
       author: req.body.author,
       date: req.body.date,
       headerImage: req.file.path,
-      category: req.body.category
+      category: req.body.category,
+      published: req.body.published
     });
     post.save().then(() => {
       res.status(200).send('Success uploading new post.');
@@ -98,7 +99,7 @@ router.route('/:id')
   .patch(function(req, res, next) {
     Post.updateOne(
       {_id: req.params.id},
-      req.body.patch,
+      {$set: req.body},
       function (err) {
         if (err)
           next(err);

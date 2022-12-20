@@ -20,6 +20,8 @@ function PostCard({ post }) {
           image={'http://localhost:9000/' + post.headerImage}
         />
         <CardContent sx={{minHeight: '100px'}}>
+          {!post.published && (
+          <Chip label = {'Unpublished'} color = 'warning' variant = 'outlined' size = 'small' /> )}
           <Typography gutterBottom variant='h5' component='div'>
             {post.title}
           </Typography>
@@ -35,7 +37,7 @@ function PostCard({ post }) {
           {post.author} · {post.date}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <PostActions id={post._id} />
+        <PostActions id={post._id} published={post.published} />
       </CardActions>
     </Card>
   );

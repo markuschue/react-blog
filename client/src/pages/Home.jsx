@@ -1,7 +1,7 @@
 import PostCard from '../components/PostCard.jsx';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useLocation } from 'react-router-dom'
 import { Card, CardContent, Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
@@ -9,9 +9,10 @@ import { Typography } from '@mui/material';
 
 function Home() {
   const [posts, setPosts] = React.useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('q');
+  let location = useLocation();
 
   useEffect(() => {
     axios.get('http://localhost:3000/posts')
@@ -31,10 +32,13 @@ function Home() {
           post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
           post.category.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+        ) && post.published;
       });
+    } else if (location.pathname === '/drafts') {
+      return posts.filter((post) => !post.published);
+    } else {
+      return posts.filter((post) => post.published);
     }
-    return posts;
   }
 
   return (
@@ -52,7 +56,7 @@ function Home() {
             <Typography variant='h4'>
               Search results for
               <Typography variant='h4' component='span' color='#4E9F3D'>
-                {` ${searchQuery}`}
+                {' ' + searchQuery }
               </Typography>
             </Typography>
           </Grid>

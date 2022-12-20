@@ -85,7 +85,7 @@ function Compose() {
     return isPublishable;
   }
 
-  async function handlePublish() {
+  async function handlePublish(publish) {
     if (checkIsPublishable()) {
       try {
         const formData = new FormData();
@@ -96,6 +96,7 @@ function Compose() {
         formData.append('date', new Date().toLocaleString());
         formData.append('content', content);
         formData.append('category', category);
+        formData.append('published', publish);
         if (id !== undefined) {
           // If the id is defined, then we are editing a post, so we use the PUT method
           await axios.put(`http://localhost:9000/posts/${id}`, formData, {
@@ -234,14 +235,16 @@ function Compose() {
             <Grid item xs={5} md={4}>
               <ButtonGroup color="success" size="large" fullWidth>
                 <Tooltip title="Save as draft">
-                  <Button>
+                  <Button 
+                    onClick={() => handlePublish(false)}
+                  >
                     <SaveAltIcon />
                   </Button>
                 </Tooltip>
                 <Button
                   variant="contained"
                   startIcon={<PublishIcon />}
-                  onClick={handlePublish}
+                  onClick={() => handlePublish(true)}
                 >
                   <Typography sx={{ display: { xs: 'none', md: 'block' } }}>
                     Publish

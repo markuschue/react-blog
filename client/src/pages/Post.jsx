@@ -43,10 +43,12 @@ function Post() {
                 </Typography>
               </Grid>
             <Box sx={{ flexGrow: 1 }} />
-            <PostActions id={post._id} />
+            <PostActions id={post._id} published={post.published} />
           </Grid>
           <Divider light = {true} />
-          <Typography variant="h4" sx={{ my: 4 }}>
+          {!post.published && (
+          <Chip label = {'Unpublished'} color = 'warning' variant = 'outlined' size = 'small' sx={{mt: 2}} /> )}
+          <Typography variant="h4" sx={{ my: 2 }}>
             <b>{post.title}</b>
           </Typography>
           <Typography color="#bdbdbd" variant="subtitle" sx={{ mb: 4 }}>

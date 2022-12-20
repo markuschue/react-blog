@@ -9,7 +9,8 @@ const PostSchema = new mongoose.Schema({
   author: String,
   date: String,
   headerImage: String,
-  category: String
+  category: String,
+  published: Boolean
 });
 
 const Post = mongoose.model('Post', PostSchema);
