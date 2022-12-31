@@ -8,6 +8,14 @@ import AlertDialog from './AlertDialog.jsx';
 import axios from 'axios';
 import { useNavigate, useLocation } from "react-router-dom";
 
+/**
+ * A component to display the actions for a post (edit, delete, archive, publish)
+ * @param {
+ *  id: string,           // The id of the post.
+ *  published: boolean    // True if the post is published, false if it's archived.
+ * } props 
+ * @returns {JSX.Element} The component to display the actions for a post.
+ */
 function PostActions({id, published}) {
   const [openDialog, setOpenDialog] = React.useState(false);
   const navigate = useNavigate();

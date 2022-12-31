@@ -5,15 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const indexRouter = require('./routes/index');
 const postRouter = require('./routes/posts');
 
 const allowedOrigins = ['http://localhost:3000'/**,
                       'http://yourapp.com'    **/];
 
+// Express app initialization and configuration.
 const app = express();
-
 app.use(cors({
   origin: function(origin, callback) {
     // allow requests with no origin 
@@ -37,7 +35,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use('/', indexRouter);
+// Routes
 app.use('/posts/', postRouter);
 
 // catch 404 and forward to error handler

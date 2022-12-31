@@ -43,6 +43,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+/**
+ * A custom search bar MUI component, which contains the search icon and input field.
+ * @returns {JSX.Element} The search bar component.
+*/
 function SearchBar() {
   const [input, setInput] = React.useState('');
 

@@ -8,6 +8,13 @@ import Box from '@mui/material/Box';
 import PostActions from './PostActions';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component to display the card of a post in the home page.
+ * @param {
+ *  post: object,         // The post to display.
+ * } props
+ * @returns {JSX.Element} The component to display the card of a post in the home page.
+ */
 function PostCard({ post }) {
   const navigate = useNavigate();
 

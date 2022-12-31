@@ -9,10 +9,15 @@ import Chip from '@mui/material/Chip';
 import PostActions from '../components/PostActions.jsx';
 import Avatar from '@mui/material/Avatar';
 
+/**
+ * The page for a single post.
+ * @returns {JSX.Element} The page for a single post.
+*/
 function Post() {
   const [post, setPost] = React.useState(null);
   const { id } = useParams();
   
+  // Retrieve the post from the server.
   useEffect(() => {
     axios.get('http://localhost:3000/posts/' + id)
       .then((res) => {

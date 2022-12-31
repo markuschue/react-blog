@@ -7,6 +7,10 @@ import { Container } from '@mui/system';
 import axios from 'axios';
 import { Typography } from '@mui/material';
 
+/**
+ * The home page for the blog, displays all published posts.
+ * @returns {JSX.Element} The home page for the blog.
+ */
 function Home() {
   const [posts, setPosts] = React.useState([]);
   const [searchParams] = useSearchParams();
@@ -14,6 +18,7 @@ function Home() {
   const searchQuery = searchParams.get('q');
   let location = useLocation();
 
+  // Retrieve all posts from the server.
   useEffect(() => {
     axios.get('http://localhost:3000/posts')
       .then((res) => {

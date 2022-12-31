@@ -6,6 +6,10 @@ import Compose from '../pages/Compose.jsx';
 import Post from '../pages/Post.jsx';
 import Theme from './Theme.jsx';
 
+/**
+ * The main component of the application, which contains the routes and the theme.
+ * @returns {JSX.Element} The main component of the application.
+ */
 function App() {
   return (
     <Theme>

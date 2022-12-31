@@ -59,6 +59,13 @@ const theme = createTheme({
   }
 });
 
+/**
+ * Component to wrap the app with the custom theme.
+ * @param {
+ *  children: JSX.Element,  // The children to wrap.
+ * } props
+ * @returns {JSX.Element} The component to wrap the app with the custom theme.
+ */
 function Theme({ children }) {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

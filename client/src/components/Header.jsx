@@ -6,6 +6,10 @@ import Typography from '@mui/material/Typography';
 import SearchBar from './SearchBar';
 import DrawerBar from './DrawerBar';
 
+/**
+ * A custom page header component, which contains the logo, search bar, and drawer bar.
+ * @returns {JSX.Element} The header component.
+ */
 function Header() {
   return (
     <Box sx={{ flexGrow: 1}}>

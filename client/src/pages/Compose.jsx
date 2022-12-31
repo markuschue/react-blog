@@ -14,6 +14,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import InputAdornment from '@mui/material/InputAdornment';
 import axios from 'axios';
 
+/**
+ * The compose page for creating and editing posts.
+ * @returns {JSX.Element} The compose page.
+ */
 function Compose() {
   let [title, setTitle] = React.useState('');
   let [description, setDescription] = React.useState('');
@@ -31,6 +35,8 @@ function Compose() {
   const navigate = useNavigate();
   const id = useParams().id;
 
+  // Retrieve the header image from the server if the post is being edited so
+  // that the user can see the current header image or send it back again.
   const setHeaderFromURL = async(fileName) => {
     const response = await axios.get(`http://localhost:9000/${fileName}`, {
       responseType: 'blob',
@@ -38,6 +44,7 @@ function Compose() {
     setHeaderImage(new File([response.data], fileName));
   }
 
+  // Retrieve the post from the server if the post is being edited.
   React.useEffect(() => {
     if (id !== undefined) {
       axios
@@ -65,6 +72,7 @@ function Compose() {
     setHeaderImage(e.target.files[0]);
   }
 
+  // Check if all the inputs are filled in, if not, set up the alerts.
   function checkIsPublishable() {
     let isPublishable = true;
     let currentAlerts = {
@@ -85,6 +93,7 @@ function Compose() {
     return isPublishable;
   }
 
+  // Handle the publish and save buttons.
   async function handlePublish(publish) {
     if (checkIsPublishable()) {
       try {

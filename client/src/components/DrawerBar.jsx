@@ -14,9 +14,19 @@ import IconButton from '@mui/material/IconButton';
 import CreateIcon from '@mui/icons-material/Create';
 import { Link } from 'react-router-dom';
 
+/**
+ * A custom drawer bar MUI component, which contains a button to open the drawer
+ * and links to the Compose Page and the Drafts Page.
+ * @returns {JSX.Element} The drawer bar component.
+ */
 function DrawerBar() {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);
 
+  /**
+   * A function to toggle the drawer open and closed.
+   * @param {bool} open 
+   * @returns 
+   */
   const toggleDrawer = open => (event) => {
     if (
       event &&
@@ -25,7 +35,6 @@ function DrawerBar() {
     ) {
       return;
     }
-
     setDrawerOpen(open);
   };
 
